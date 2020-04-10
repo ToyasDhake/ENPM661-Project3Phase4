@@ -13,6 +13,7 @@
     <arg name="debug" value="false"/>
   </include>
 
+    <node pkg="ENPM661-Project3Phase4" name="turtlebotController" type="turtlebotController.py" output="screen"/>
 
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
 
