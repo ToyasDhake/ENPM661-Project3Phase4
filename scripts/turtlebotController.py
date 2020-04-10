@@ -5,6 +5,7 @@ from gazebo_msgs.msg import LinkState
 from geometry_msgs.msg import Twist
 from AStar import AStar
 from time import sleep
+import sys
 
 def getRPM(action, stepSize):
     if action == "1":
@@ -29,10 +30,10 @@ def main():
     cmd_publish = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
     rate = rospy.Rate(1) # 10hz
     # to induce the wandering behaviour
-    stepSize = [60,30]
+    stepSize = [int(sys.argv[7]), int(sys.argv[8])]
     clearance = 5
-    aStar = AStar([10, 10, 0],
-                  [90, 90], clearance, stepSize)
+    aStar = AStar([int((float(sys.argv[1])+5)*10), int((float(sys.argv[2])+5)*10), int(sys.argv[3])],
+                  [int((float(sys.argv[4])+5)*10), int((float(sys.argv[5])+5)*10)], clearance+int(sys.argv[6]), stepSize)
     solution = aStar.solve()
     print(len(solution))
     temp = solution[0]
