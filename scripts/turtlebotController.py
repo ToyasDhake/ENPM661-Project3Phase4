@@ -6,6 +6,7 @@ from geometry_msgs.msg import Twist
 from AStar import AStar
 from time import sleep
 import sys
+from math import degrees
 
 def getRPM(action, stepSize):
     if action == "1":
@@ -32,7 +33,7 @@ def main():
     # to induce the wandering behaviour
     stepSize = [int(sys.argv[7]), int(sys.argv[8])]
     clearance = 5
-    aStar = AStar([int((float(sys.argv[1])+5)*10), int((float(sys.argv[2])+5)*10), int(sys.argv[3])],
+    aStar = AStar([int((float(sys.argv[1])+5)*10), int((float(sys.argv[2])+5)*10), int(degrees(float(sys.argv[3])))],
                   [int((float(sys.argv[4])+5)*10), int((float(sys.argv[5])+5)*10)], clearance+int(sys.argv[6]), stepSize)
     solution = aStar.solve()
     print(len(solution))
